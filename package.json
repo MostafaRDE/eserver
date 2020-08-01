@@ -1,0 +1,34 @@
+{
+  "name": "karzar-server-v2",
+  "version": "0.1.0",
+  "description": "Backend Karzar server",
+  "private": true,
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/mostafarde/karzar-server-v2.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "author": {
+    "name": "Mostafa Rostam Dokht Effati",
+    "email": "mostafa3.rostamdokht@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mostafarde/karzar-server-v2/issues"
+  },
+  "homepage": "https://gitlab.com/mostafarde/karzar-server-v2#README",
+  "dependencies": {
+    "@types/node": "^14.0.27",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}
