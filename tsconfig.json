@@ -1,9 +1,17 @@
 {
     "compilerOptions": {
+        "allowJs": false,
+        "checkJs": false,
         "module": "commonjs",
         "target": "es5",
         "sourceMap": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/kernel/types",
+            "./types"
+        ],
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules"

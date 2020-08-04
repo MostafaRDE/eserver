@@ -5,8 +5,8 @@
   "private": true,
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js",
+    "build": "tsc && cross-env NODE_ENV=production node dist/server.js",
+    "start": "tsc && cross-env NODE_ENV=development node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,7 +28,11 @@
   "homepage": "https://gitlab.com/mostafarde/karzar-server-v2#README",
   "dependencies": {
     "@types/node": "^14.0.27",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/express": "^4.17.7"
+  }
 }
