@@ -12,7 +12,6 @@
 import * as express from 'express'
 global.app = express()
 
-
 /*
 |--------------------------------------------------------------------------
 | Bootstrapping and config application
@@ -23,7 +22,6 @@ global.app = express()
 */
 
 import './src/app'
-
 
 /*
 |--------------------------------------------------------------------------
