@@ -4,8 +4,7 @@
 |--------------------------------------------------------------------------
 |
 | The first thing we will do is create a new EServer application instance
-| which serves as the "glue" for all the components of EServer, and is
-| the IoC container for the system binding all of the various parts.
+| which serves all program at on the your custom port.
 |
 */
 
