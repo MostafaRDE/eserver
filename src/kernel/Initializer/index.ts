@@ -9,7 +9,7 @@
 
 const fs = require('fs')
 
-require('dotenv').config({ path: `.env` })
+require('dotenv').config({ path: '.env' })
 if (fs.existsSync(global.resolve(`.env.${ process.env.NODE_ENV }`)))
     require('dotenv').config({ path: `.env.${ process.env.NODE_ENV }` })
 

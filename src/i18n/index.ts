@@ -4,7 +4,8 @@ const i18n = require('i18n')
 const { readdirSync } = require('fs'),
     locales = []
 
-readdirSync('./src/i18n/locals').forEach(file => {
+readdirSync('./src/i18n/locals').forEach(file =>
+{
     locales.push(file.replace(/\.json$/, ''))
 })
 
