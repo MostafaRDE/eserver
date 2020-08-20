@@ -13,10 +13,10 @@ let { readdirSync } = require('fs')
 
 readdirSync('./src/kernel/Foundation/Helpers').forEach(file =>
 {
-    if (file !== 'index.ts' && /\.ts$/.test(file))
+    if (/\.ts$/.test(file))
     {
         const filename = file.replace(/\.ts$/, '')
-        let functions = require(`./${ filename }`)
+        let functions = require(`../Foundation/Helpers/${ filename }`)
         Object.keys(functions).forEach(key => {
             global[key] = functions[key]
         })

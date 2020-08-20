@@ -14,10 +14,10 @@ const { readdirSync } = require('fs'),
 
 readdirSync('./src/config').forEach(file =>
 {
-    if (file !== 'index.ts' && /\.ts$/.test(file))
+    if (/\.ts$/.test(file))
     {
         const filename = file.replace(/\.ts$/, '')
-        config[filename] = require(`./${ filename }`)
+        config[filename] = require(`../../config/${ filename }`)
     }
 });
 
