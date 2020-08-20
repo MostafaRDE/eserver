@@ -6,6 +6,6 @@ export namespace App.Router.Controllers
 
     export class Controller extends BaseController
     {
-
+        //
     }
 }

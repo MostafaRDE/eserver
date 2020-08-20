@@ -1,6 +1,10 @@
+import * as HttpKernelImporter from '../../kernel/Foundation/Http/Kernel'
+
 export namespace App.Http
 {
-    export class Kernel
+    import HttpKernel = HttpKernelImporter.Kernel.Foundation.Http.Kernel
+
+    export class Kernel extends HttpKernel
     {
         /**
          * The application's global HTTP middleware stack.
@@ -18,6 +22,6 @@ export namespace App.Http
          *
          * @var array
          */
-        protected $routeMiddleware = {}
+        protected routeMiddleware = {}
     }
 }

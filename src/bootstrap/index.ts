@@ -20,4 +20,4 @@ import '../kernel/Initializer'
 |
 */
 
-import '../kernel/Foundation/Booter'
+import '../kernel/Foundation/booter'
