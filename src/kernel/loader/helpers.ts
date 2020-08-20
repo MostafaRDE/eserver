@@ -9,16 +9,14 @@
 */
 
 // @ts-ignore
-let { readdirSync } = require('fs')
+const { readdirSync } = require('fs')
 
-readdirSync('./src/kernel/Foundation/Helpers').forEach(file =>
-{
-    if (/\.ts$/.test(file))
-    {
+readdirSync('./src/kernel/Foundation/Helpers').forEach(file => {
+    if (/\.ts$/.test(file)) {
         const filename = file.replace(/\.ts$/, '')
-        let functions = require(`../Foundation/Helpers/${ filename }`)
+        const functions = require(`../Foundation/Helpers/${ filename }`)
         Object.keys(functions).forEach(key => {
-            global[key] = functions[key]
+            global[ key ] = functions[ key ]
         })
     }
-});
+})

@@ -12,13 +12,11 @@
 const { readdirSync } = require('fs'),
     config = {}
 
-readdirSync('./src/config').forEach(file =>
-{
-    if (/\.ts$/.test(file))
-    {
+readdirSync('./src/config').forEach(file => {
+    if (/\.ts$/.test(file)) {
         const filename = file.replace(/\.ts$/, '')
-        config[filename] = require(`../../config/${ filename }`)
+        config[ filename ] = require(`../../config/${ filename }`)
     }
-});
+})
 
 global.config = config

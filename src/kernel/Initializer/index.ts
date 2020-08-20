@@ -36,3 +36,15 @@ import '../loader/helpers'
 */
 
 import '../loader/config'
+
+
+/*
+|--------------------------------------------------------------------------
+| Load Languages
+|--------------------------------------------------------------------------
+|
+| Here we loads languages or glossaries of application.
+|
+*/
+
+import '../../i18n'
