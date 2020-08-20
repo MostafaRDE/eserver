@@ -8,8 +8,8 @@
         "outDir": "dist",
         "typeRoots": [
             "./node_modules/@types",
-            "./src/kernel/types",
-            "./types"
+            "./src/kernel/typings",
+            "./typings"
         ],
         "allowSyntheticDefaultImports": true
     },

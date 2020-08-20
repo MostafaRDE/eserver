@@ -7,8 +7,11 @@
 |
 */
 
+const fs = require('fs')
+
 require('dotenv').config({ path: `.env` })
-require('dotenv').config({ path: `.env.${ process.env.NODE_ENV }` })
+if (fs.existsSync(global.resolve(`.env.${ process.env.NODE_ENV }`)))
+    require('dotenv').config({ path: `.env.${ process.env.NODE_ENV }` })
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +36,16 @@ import '../Foundation/Helpers'
 */
 
 import '../../config'
+
+/*
+|--------------------------------------------------------------------------
+| Service Providers
+|--------------------------------------------------------------------------
+|
+| Here we need setup providers by behavior steps:
+| 1- Registering Service Providers
+| 2- Booting Service Providers
+|
+*/
+
+import '../Foundation/Booter'

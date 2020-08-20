@@ -5,9 +5,11 @@
   "private": true,
   "main": "dist/server.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node ./server.ts",
+    "dev": "cross-env NODE_ENV=development tsc",
     "watch": "cross-env NODE_ENV=development nodemon -e ts -w ./server.ts -x",
-    "build": "tsc && cross-env NODE_ENV=production node dist/server.js",
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
+    "bs": "npm run build && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
