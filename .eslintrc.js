@@ -16,7 +16,7 @@ module.exports = {
     },
     'rules': {
         'array-bracket-spacing': [ 'error', 'always' ],
-        'brace-style': [ 'error', 'stroustrup', { 'allowSingleLine': true } ],
+        'brace-style': [ 'error', 'allman', { 'allowSingleLine': true } ],
         'comma-dangle': [ 'error', 'always-multiline' ],
         'comma-spacing': [ 'error', { 'before': false, 'after': true } ],
         'eqeqeq': 'warn',
@@ -60,6 +60,8 @@ module.exports = {
             ],
             rules: {
                 '@typescript-eslint/ban-ts-comment': 'off',
+                '@typescript-eslint/explicit-module-boundary-types': 'off',
+                '@typescript-eslint/no-namespace': 'off',
                 '@typescript-eslint/no-var-requires': 'off',
             },
         },
