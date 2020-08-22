@@ -35,7 +35,6 @@ interface IRouter
      * Options
      */
     prefix(path: string)
-    namespace(namespace: string)
     group(cb: (router: Router) => void)
     addMiddleware(name: string)
 }
@@ -57,7 +56,6 @@ export default class Router implements IRouter
      */
     protected options = {
         prefix: '',
-        namespace: '',
         middleware: [],
         locked: [],
     }
@@ -187,12 +185,6 @@ export default class Router implements IRouter
     prefix(path: string)
     {
         this.options.prefix = nodePath.resolve(this.options.prefix, path)
-        return this
-    }
-
-    namespace(namespace: string)
-    {
-        this.options.namespace = nodePath.resolve(this.options.namespace, namespace)
         return this
     }
 
