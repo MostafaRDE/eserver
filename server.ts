@@ -28,8 +28,6 @@ global.resolve = subPath => path.resolve(__dirname, subPath)
 | Bootstrapping and config application
 |--------------------------------------------------------------------------
 |
-
-
 | The second thing we will config application for run and use it.
 |
 */
