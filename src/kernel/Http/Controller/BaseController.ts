@@ -1,7 +1,4 @@
-export namespace Kernel.Http.Controller
+export default class BaseController
 {
-    export class BaseController
-    {
 
-    }
 }

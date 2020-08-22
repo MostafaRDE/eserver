@@ -1,4 +1,4 @@
-export function env(name: string, defaultValue?: any)
+export function env(name: string, defaultValue?)
 {
     if (hasOwnProperty(process.env, name))
         return process.env[ name ]
@@ -6,7 +6,7 @@ export function env(name: string, defaultValue?: any)
         return defaultValue
 }
 
-export function hasOwnProperty(object, key)
+export function hasOwnProperty(object: Record<string, unknown>, key: string)
 {
     return Object.prototype.hasOwnProperty.call(object, key)
 }

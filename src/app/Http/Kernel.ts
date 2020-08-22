@@ -1,27 +1,22 @@
-import * as HttpKernelImporter from '../../kernel/Foundation/Http/Kernel'
+import HttpKernel from '../../kernel/Foundation/Http/Kernel'
 
-export namespace App.Http
+export default class Kernel extends HttpKernel
 {
-    import HttpKernel = HttpKernelImporter.Kernel.Foundation.Http.Kernel
+    /**
+     * The application's global HTTP middleware stack.
+     *
+     * These middleware are run during every request to your application.
+     *
+     * @var array
+     */
+    protected middleware = [];
 
-    export class Kernel extends HttpKernel
-    {
-        /**
-         * The application's global HTTP middleware stack.
-         *
-         * These middleware are run during every request to your application.
-         *
-         * @var array
-         */
-        protected middleware = [];
-
-        /**
-         * The application's route middleware.
-         *
-         * These middleware may be assigned to groups or used individually.
-         *
-         * @var array
-         */
-        protected routeMiddleware = {}
-    }
+    /**
+     * The application's route middleware.
+     *
+     * These middleware may be assigned to groups or used individually.
+     *
+     * @var array
+     */
+    protected routeMiddleware = {}
 }

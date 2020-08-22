@@ -1,18 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new EServer application instance
-| which serves all program at on the your custom port.
-|
-*/
-
-import * as express from 'express'
-global.app = express()
-
-/*
-|--------------------------------------------------------------------------
 | Root Directory Resolver
 |--------------------------------------------------------------------------
 |
@@ -25,6 +12,19 @@ global.resolve = subPath => path.resolve(__dirname, subPath)
 
 /*
 |--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| The first thing we will do is create a new EServer application instance
+| which serves all program at on the your custom port.
+|
+*/
+
+import App from './src/app'
+global.app = new App()
+
+/*
+|--------------------------------------------------------------------------
 | Bootstrapping and config application
 |--------------------------------------------------------------------------
 |
@@ -32,7 +32,7 @@ global.resolve = subPath => path.resolve(__dirname, subPath)
 |
 */
 
-import './src/app'
+import './src/bootstrap'
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,4 @@ import './src/app'
 |
 */
 
-global.app.listen(parseInt(process.env.PROT), process.env.HOSTNAME, () => {
-    console.log(`Server start at port ${ process.env.PROT }`)
-})
+global.app.listen()

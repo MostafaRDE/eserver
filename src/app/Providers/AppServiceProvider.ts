@@ -1,29 +1,24 @@
-import * as ServiceProviderImporter from '../../kernel/Support/ServiceProvider'
+import ServiceProvider from '../../kernel/Support/ServiceProvider'
 
-export namespace App.Providers
+export default class AppServiceProvider extends ServiceProvider
 {
-    import ServiceProvider = ServiceProviderImporter.Kernel.Support.ServiceProvider
-
-    export class AppServiceProvider extends ServiceProvider
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public register()
     {
-        /**
-         * Register any application services.
-         *
-         * @return void
-         */
-        public register()
-        {
-            //
-        }
+        //
+    }
 
-        /**
-         * Bootstrap any application services.
-         *
-         * @return void
-         */
-        public boot()
-        {
-            //
-        }
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public boot()
+    {
+        //
     }
 }

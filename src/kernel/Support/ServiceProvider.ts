@@ -1,15 +1,12 @@
-export namespace Kernel.Support
+export default class ServiceProvider
 {
-    export class ServiceProvider
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public provides()
     {
-        /**
-         * Get the services provided by the provider.
-         *
-         * @return array
-         */
-        public provides()
-        {
-            return []
-        }
+        return []
     }
 }

@@ -16,4 +16,4 @@ i18n.configure({
     register: global,
 })
 
-global.app.use(i18n.init)
+global.app.app.use(i18n.init)

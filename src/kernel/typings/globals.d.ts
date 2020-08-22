@@ -1,6 +1,5 @@
-import { Express } from 'express'
-import * as RouterImporter from '../Foundation/Routing/Router'
-import Router = RouterImporter.Kernel.Foundation.Routing.Router
+import Router from '../Foundation/Routing/Router'
+import App from '../../app'
 
 declare global
 {
@@ -8,8 +7,8 @@ declare global
     {
         export interface Global
         {
-            app: Express
-            config: Object
+            app: App
+            config: Record<string, unknown>
             resolve: (subPath: string) => ''
             router: Router
         }

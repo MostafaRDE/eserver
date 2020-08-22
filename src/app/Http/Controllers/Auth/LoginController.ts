@@ -1,15 +1,11 @@
-import * as ControllerImporter from '../Controller'
 import express from 'express'
 
-export namespace App.Router.Controllers
-{
-    import Controller = ControllerImporter.App.Router.Controllers.Controller
+import Controller from '../Controller'
 
-    export class LoginController extends Controller
+export default class LoginController extends Controller
+{
+    login(req: express.Request, res: express.Response)
     {
-        login(req: express.Request, res: express.Response)
-        {
-            //
-        }
+        //
     }
 }
