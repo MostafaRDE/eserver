@@ -1,4 +1,4 @@
-import ServiceProvider from '../../kernel/Support/ServiceProvider'
+import ServiceProvider from '../../kernel/Foundation/ServiceProvider'
 
 export class AppServiceProvider extends ServiceProvider
 {

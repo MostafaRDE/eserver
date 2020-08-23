@@ -18,7 +18,7 @@ import * as userAgent from 'express-useragent'
 import * as cors from 'cors'
 
 import HttpKernel from './app/Http/Kernel'
-import ServiceProvider from './kernel/Support/ServiceProvider'
+import ServiceProvider from './kernel/Foundation/ServiceProvider'
 
 export default class App
 {
