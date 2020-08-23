@@ -9,7 +9,9 @@ export default class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected middleware = [];
+    protected middleware = [
+        require('../Http/Middleware/CheckForMaintenanceMode').CheckForMaintenanceMode,
+    ]
 
     /**
      * The application's route middleware.
@@ -18,5 +20,7 @@ export default class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected routeMiddleware = {}
+    protected routeMiddleware = {
+        'auth': require('../Http/Middleware/Authenticate').Authenticate,
+    }
 }
