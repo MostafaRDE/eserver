@@ -1,6 +1,6 @@
 import ServiceProvider from '../../kernel/Support/ServiceProvider'
 
-export default class AppServiceProvider extends ServiceProvider
+export class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.

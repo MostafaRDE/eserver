@@ -4,47 +4,16 @@ import * as ExpressRouterImporter from 'express'
 
 import ExpressRouter = ExpressRouterImporter.Router
 
-type RouterControllerType = string | ((...args) => void)
+import { RouterControllerType, IRouter } from './IRouter'
 
-interface IRoute
-{
-    method: string,
-    path: string,
-    middleware: ((...args) => void)[],
-    controller: ((req, res) => void),
-}
-
-interface IRouter
-{
-    /**
-     * Methods
-     */
-    get(path: string, controller: RouterControllerType)
-    patch(path: string, controller: RouterControllerType)
-    post(path: string, controller: RouterControllerType)
-    put(path: string, controller: RouterControllerType)
-    delete(path: string, controller: RouterControllerType)
-
-    /**
-     * Default
-     */
-    resource(path: string, controller: string)
-    any(path: string, controller: RouterControllerType)
-
-    /**
-     * Options
-     */
-    prefix(path: string)
-    group(cb: (router: Router) => void)
-    addMiddleware(name: string)
-}
+import IRoute from './IRoute'
 
 export default class Router implements IRouter
 {
     /**
      * The route collection instance.
      */
-    protected static routes: IRoute[] = []
+    public static routes: IRoute[] = []
 
     /**
      * The express router.
@@ -55,9 +24,9 @@ export default class Router implements IRouter
      * The route options instance.
      */
     protected options = {
+        namespace: '',
         prefix: '',
         middleware: [],
-        locked: [],
     }
 
     /**
@@ -86,23 +55,6 @@ export default class Router implements IRouter
         this.eRouter.get('')
     }
 
-    // public clone(): any
-    // {
-    //     const cloneObj = new (this.constructor() as any)
-    //     for (const attribute in this)
-    //     {
-    //         if (typeof this[ attribute ] === 'object')
-    //         {
-    //             cloneObj[ attribute ] = this[ attribute ].clone()
-    //         }
-    //         else
-    //         {
-    //             cloneObj[ attribute ] = this[ attribute ]
-    //         }
-    //     }
-    //     return cloneObj
-    // }
-
     /**
      * Register a short-hand name for a middleware.
      */
@@ -118,9 +70,10 @@ export default class Router implements IRouter
     {
         Router.routes.forEach(route =>
         {
-            global.app[ route.method ](route.path, ...[ ...route.middleware, route.controller ])
+            global.app.app[ route.method ](route.path, ...[ ...route.middleware, route.controller ])
         })
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -132,34 +85,101 @@ export default class Router implements IRouter
     |
     */
 
+    private controllerGetter(controllerHandler: RouterControllerType)
+    {
+        let controller
+
+        if (typeof controllerHandler === 'string')
+        {
+            const [ controllerClass, controllerMethod ] = controllerHandler.split('@')
+            const _controllerPath = global.stringJoin({
+                delimiter: '/',
+                first: false,
+                last: false,
+            }, this.options.namespace, controllerClass)
+
+            const _controller = require(`../../../app/Http/Controllers/${ _controllerPath }`).default
+            controller = new _controller()[ controllerMethod ]
+        }
+        else
+        {
+            controller = controllerHandler
+        }
+
+        return controller
+    }
+
+    private addRoute({ method, path, controller }: IRoute)
+    {
+        Router.routes.push({
+            method,
+            path: global.stringJoin({
+                delimiter: '/',
+                first: true,
+                last: false,
+            }, '/', this.options.prefix, path),
+            middleware: [ ...this.middlewarePriority, ...this.middleware, ...this.options.middleware ],
+            controller,
+        })
+    }
+
 
     /**
      * Methods
      */
 
-    get(path: string, controller: RouterControllerType)
+    public all(path: string, controllerHandler: RouterControllerType)
     {
-        //
+        this.addRoute({
+            method: 'all',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
     }
 
-    patch(path: string, controller: RouterControllerType)
+    public get(path: string, controllerHandler: RouterControllerType)
     {
-        //
+        this.addRoute({
+            method: 'get',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
     }
 
-    post(path: string, controller: RouterControllerType)
+    public patch(path: string, controllerHandler: RouterControllerType)
     {
-        //
+        this.addRoute({
+            method: 'patch',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
     }
 
-    put(path: string, controller: RouterControllerType)
+    public post(path: string, controllerHandler: RouterControllerType)
     {
-        //
+        this.addRoute({
+            method: 'post',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
     }
 
-    delete(path: string, controller: RouterControllerType)
+    public put(path: string, controllerHandler: RouterControllerType)
     {
-        //
+        this.addRoute({
+            method: 'put',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
+    }
+
+    public delete(path: string, controllerHandler: RouterControllerType)
+    {
+        this.addRoute({
+            method: 'delete',
+            path,
+            controller: this.controllerGetter(controllerHandler),
+        })
     }
 
 
@@ -167,14 +187,13 @@ export default class Router implements IRouter
      * Default
      */
 
-    resource(path: string, controller: string)
+    public resource(path: string, controllerHandler: string)
     {
-        //
-    }
-
-    any(path: string, controller: RouterControllerType)
-    {
-        //
+        this.get(path, `${ controllerHandler }@index`)
+        this.post(path, `${ controllerHandler }@store`)
+        this.get(`${ path }/:id`, `${ controllerHandler }@show`)
+        this.put(`${ path }/:id`, `${ controllerHandler }@update`)
+        this.delete(`${ path }/:id`, `${ controllerHandler }@destroy`)
     }
 
 
@@ -182,19 +201,39 @@ export default class Router implements IRouter
      * Options
      */
 
-    prefix(path: string)
+    public namespace(namespace: string)
     {
-        this.options.prefix = nodePath.resolve(this.options.prefix, path)
-        return this
+        const _this = global.clone(this)
+
+        _this.options.namespace = global.stringJoin({
+            delimiter: '/',
+            first: false,
+            last: true,
+        }, '/', this.options.namespace, namespace)
+
+        return _this
     }
 
-    group(callback: (router: Router) => void)
+    public prefix(path: string)
     {
-        callback(Object.assign({}, this))
+        const _this = global.clone(this)
+
+        _this.options.prefix = global.stringJoin({
+            delimiter: '/',
+            first: true,
+            last: true,
+        }, '/', this.options.prefix, path)
+
+        return _this
     }
 
-    addMiddleware(name: string)
+    public group(callback: (router: Router) => void)
     {
-        //
+        callback(global.clone(this))
+    }
+
+    public addMiddleware(name: string)
+    {
+        this.middleware.push(this.middlewareRoutes[ name ])
     }
 }

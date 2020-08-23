@@ -4,8 +4,8 @@ import Controller from '../Controller'
 
 export default class LoginController extends Controller
 {
-    login(req: express.Request, res: express.Response)
+    public login(request: express.Request, response: express.Response)
     {
-        //
+        response.json({ status: true })
     }
 }

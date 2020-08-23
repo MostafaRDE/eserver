@@ -7,7 +7,7 @@
 |
 */
 
-const Router = require('../Routing/Router')
+const Router = require('../Routing/Router').default
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,20 @@ const Router = require('../Routing/Router')
 |
 */
 
-global.router = new Router()
+Object.defineProperty(global, 'router', {
+    get: () => new Router,
+})
+
+/*
+|--------------------------------------------------------------------------
+| Loading Routes
+|--------------------------------------------------------------------------
+|
+| Here we load aal routes of your application from './src/routes'.
+|
+*/
+
+import '../../../routes'
 
 /*
 |--------------------------------------------------------------------------

@@ -1,19 +1,14 @@
-import * as ServiceProviderImporter from '../../kernel/Foundation/Support/Providers/AuthServiceProvider'
+import ServiceProvider from '../../kernel/Foundation/Support/Providers/AuthServiceProvider'
 
-export namespace App.Providers
+export class AuthServiceProvider extends ServiceProvider
 {
-    import ServiceProvider = ServiceProviderImporter.Kernel.Foundation.Support.Providers.AuthServiceProvider
-
-    export class AuthServiceProvider extends ServiceProvider
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public boot()
     {
-        /**
-         * Register any authentication / authorization services.
-         *
-         * @return void
-         */
-        public boot()
-        {
-            //
-        }
+        //
     }
 }

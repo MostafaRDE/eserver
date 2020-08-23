@@ -1,6 +1,6 @@
 import ServiceProvider from '../../../Support/ServiceProvider'
 
-export class RouteServiceProvider extends ServiceProvider
+export default class RouteServiceProvider extends ServiceProvider
 {
     /**
      * Register any authentication / authorization services.

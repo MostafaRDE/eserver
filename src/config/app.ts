@@ -120,9 +120,9 @@ module.exports = {
          * Application Service Providers...
          */
 
-        require('../app/Providers/AppServiceProvider').App.Providers.AppServiceProvider,
-        require('../app/Providers/AuthServiceProvider').App.Providers.AuthServiceProvider,
-        require('../app/Providers/RouteServiceProvider').App.Providers.RouteServiceProvider,
+        require('../app/Providers/AppServiceProvider').AppServiceProvider,
+        require('../app/Providers/AuthServiceProvider').AuthServiceProvider,
+        require('../app/Providers/RouteServiceProvider').RouteServiceProvider,
 
     ],
 

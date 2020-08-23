@@ -1,4 +1,7 @@
-global.router.prefix('/api/v1').group((router) =>
+global.router.prefix('api/v1').group((router) =>
 {
-    router.get('login', 'LoginController@login')
+    router.namespace('Auth').group((router) =>
+    {
+        router.get('login', 'LoginController@login')
+    })
 })

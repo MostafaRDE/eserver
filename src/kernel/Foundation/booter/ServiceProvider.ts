@@ -7,7 +7,7 @@
 |
 */
 
-const serviceProviders = global.config['app']['providers'].map(sp =>  new sp())
+global.app.serviceProviders = global.config[ 'app' ][ 'providers' ].map(sp => new sp())
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +19,10 @@ const serviceProviders = global.config['app']['providers'].map(sp =>  new sp())
 |
 */
 
-serviceProviders.forEach(sp =>
+global.app.serviceProviders.forEach(sp =>
 {
-    if (typeof sp['register'] === 'function')
-        sp.register()
+    if (typeof sp[ 'register' ] === 'function')
+        sp[ 'register' ]()
 })
 
 /*
@@ -35,8 +35,8 @@ serviceProviders.forEach(sp =>
 |
 */
 
-serviceProviders.forEach(sp =>
+global.app.serviceProviders.forEach(sp =>
 {
-    if (typeof sp['boot'] === 'function')
-        sp.boot()
+    if (typeof sp[ 'boot' ] === 'function')
+        sp[ 'boot' ]()
 })

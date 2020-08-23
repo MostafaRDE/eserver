@@ -1,5 +1,5 @@
 import Router from '../Foundation/Routing/Router'
-import App from '../../app'
+import App from '../../App'
 
 declare global
 {
