@@ -1,4 +1,4 @@
-import ServiceProvider from '../../ServiceProvider'
+import ServiceProvider from '../ServiceProvider'
 
 export default class RouteServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,7 @@ export default class RouteServiceProvider extends ServiceProvider
     protected loadRouter()
     {
         // Router Instance
-        const Router = require('../../Routing/Router').default
+        const Router = require('../Routing/Router').default
 
         // Store Router as globally with create new instance with every calls
         Object.defineProperty(global, 'router', {
@@ -48,7 +48,7 @@ export default class RouteServiceProvider extends ServiceProvider
      */
     protected loadRoutes()
     {
-        require('../../../../routes')
+        require('../../../routes')
         global.router.builder()
     }
 }

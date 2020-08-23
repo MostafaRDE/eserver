@@ -1,4 +1,4 @@
-import ServiceProvider from '../../kernel/Foundation/Support/Providers/AuthServiceProvider'
+import ServiceProvider from '../../kernel/Foundation/Providers/AuthServiceProvider'
 
 export class AuthServiceProvider extends ServiceProvider
 {

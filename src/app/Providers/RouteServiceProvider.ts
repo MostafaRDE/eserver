@@ -1,4 +1,4 @@
-import ServiceProvider from '../../kernel/Foundation/Support/Providers/RouteServiceProvider'
+import ServiceProvider from '../../kernel/Foundation/Providers/RouteServiceProvider'
 
 export class RouteServiceProvider extends ServiceProvider
 {
