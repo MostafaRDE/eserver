@@ -20,7 +20,7 @@ global.resolve = subPath => path.resolve(__dirname, subPath)
 |
 */
 
-import App from './src/App'
+import App from './src/kernel/App'
 global.app = new App()
 
 /*

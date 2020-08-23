@@ -1,7 +1,9 @@
 import Router from './Routing/Router'
+import Middleware from './Middleware'
 
 export default class Kernel
 {
+    protected a = 1
     /**
      * The router instance.
      *
@@ -16,7 +18,7 @@ export default class Kernel
      *
      * @var array
      */
-    protected middleware = [];
+    protected middleware: Middleware[] = [];
 
     /**
      * The application's route middleware.
@@ -25,7 +27,7 @@ export default class Kernel
      *
      * @var array
      */
-    protected routeMiddleware = {}
+    protected routeMiddleware: Record<string, Middleware> = {}
 
     /**
      * The priority-sorted list of middleware.
@@ -34,7 +36,7 @@ export default class Kernel
      *
      * @var array
      */
-    protected middlewarePriority = [
+    protected middlewarePriority: Middleware[] = [
         // StartSession
         // ShareErrorsFromSession
         // AuthenticatesRequests
@@ -43,18 +45,12 @@ export default class Kernel
         // SubstituteBindings
         // Authorize
     ]
-
-    constructor()
-    {
-        this.syncMiddlewareToRouter()
-    }
-
     /**
      * Sync the current state of the middleware to the router.
      *
      * @return void
      */
-    protected syncMiddlewareToRouter()
+    public syncMiddlewareToRouter()
     {
         Router.middlewarePriority = this.middlewarePriority
 

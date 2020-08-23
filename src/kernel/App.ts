@@ -17,8 +17,8 @@ import * as cookieParser from 'cookie-parser'
 import * as userAgent from 'express-useragent'
 import * as cors from 'cors'
 
-import HttpKernel from './app/Http/Kernel'
-import ServiceProvider from './kernel/Foundation/ServiceProvider'
+import HttpKernel from '../app/Http/Kernel'
+import ServiceProvider from './Foundation/ServiceProvider'
 
 export default class App
 {
@@ -39,6 +39,7 @@ export default class App
         this.app = express()
         this.port = parseInt(process.env.PORT || '8080')
         this.httpKernel = new HttpKernel()
+        this.httpKernel.syncMiddlewareToRouter()
 
         this.initializeExpressMiddlewares()
     }

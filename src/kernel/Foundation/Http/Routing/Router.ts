@@ -3,6 +3,7 @@ import { Router as ExpressRouter } from 'express'
 import { RouterControllerType, IRouter } from './IRouter'
 
 import IRoute from './IRoute'
+import Middleware from "../Middleware";
 
 export default class Router implements IRouter
 {
@@ -102,7 +103,7 @@ export default class Router implements IRouter
                 last: false,
             }, this.baseNamespace, this.options.namespace, controllerClass)
 
-            const _controller = require(`../../../${ _controllerPath }`).default
+            const _controller = require(`../../../../${ _controllerPath }`).default
             controller = new _controller()[ controllerMethod ]
         }
         else
@@ -111,6 +112,11 @@ export default class Router implements IRouter
         }
 
         return controller
+    }
+
+    private static convertMiddlewareForExpress(...middlewares: any[])
+    {
+        return middlewares.map(middleware => new middleware().runner)
     }
 
     private addRoute({ method, path, controller }: IRoute)
@@ -122,7 +128,7 @@ export default class Router implements IRouter
                 first: true,
                 last: false,
             }, '/', this.options.prefix, path),
-            middleware: [ ...Router.middlewarePriority, ...Router.middleware, ...this.options.middleware ],
+            middleware: [ ...Router.convertMiddlewareForExpress(...Router.middlewarePriority, ...Router.middleware, ...this.options.middleware) ],
             controller,
         })
     }

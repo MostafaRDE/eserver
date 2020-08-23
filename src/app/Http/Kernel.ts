@@ -1,7 +1,9 @@
 import HttpKernel from '../../kernel/Foundation/Http/Kernel'
+import Middleware from '../../kernel/Foundation/Http/Middleware'
 
 export default class Kernel extends HttpKernel
 {
+    protected a = 2
     /**
      * The application's global HTTP middleware stack.
      *
@@ -9,7 +11,7 @@ export default class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected middleware = [
+    protected middleware: Middleware[] = [
         require('../Http/Middleware/CheckForMaintenanceMode').CheckForMaintenanceMode,
     ]
 
@@ -20,7 +22,8 @@ export default class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected routeMiddleware = {
+    protected routeMiddleware: Record<string, Middleware> = {
         'auth': require('../Http/Middleware/Authenticate').Authenticate,
     }
+
 }
