@@ -1,4 +1,4 @@
-import Router from '../Foundation/Routing/Router'
+import Router from '../Foundation/Http/Routing/Router'
 import App from '../../App'
 
 declare global

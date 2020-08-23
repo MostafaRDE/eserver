@@ -33,7 +33,7 @@ export default class RouteServiceProvider extends ServiceProvider
     protected loadRouter()
     {
         // Router Instance
-        const Router = require('../Routing/Router').default
+        const Router = require('../Http/Routing/Router').default
 
         // Store Router as globally with create new instance with every calls
         Object.defineProperty(global, 'router', {

@@ -1,4 +1,4 @@
-import Router from '../Routing/Router'
+import Router from './Routing/Router'
 
 export default class Kernel
 {
