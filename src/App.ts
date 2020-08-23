@@ -17,19 +17,28 @@ import * as cookieParser from 'cookie-parser'
 import * as userAgent from 'express-useragent'
 import * as cors from 'cors'
 
+import HttpKernel from './app/Http/Kernel'
 import ServiceProvider from './kernel/Support/ServiceProvider'
 
 export default class App
 {
+    /**
+     * Express Application Config
+     */
     public app: express.Application
     public port: number
+    public httpKernel: HttpKernel
 
+    /**
+     * Service providers list
+     */
     private _serviceProviders: ServiceProvider[]
 
     constructor()
     {
         this.app = express()
         this.port = parseInt(process.env.PORT || '8080')
+        this.httpKernel = new HttpKernel()
 
         this.initializeExpressMiddlewares()
     }
@@ -44,13 +53,10 @@ export default class App
         this._serviceProviders = serviceProviders
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Router Initializer
-    |--------------------------------------------------------------------------
-    |
-    | Here initialize routes and add routes in express.
-    |
+    /**
+    * Express Middlewares Initializer
+    *
+    * Here initialize routes and add routes in express.
     */
     private initializeExpressMiddlewares()
     {
@@ -67,6 +73,9 @@ export default class App
         this.app.use(cors())
     }
 
+    /**
+     * Starting server
+     */
     public listen()
     {
         this.app.listen(parseInt(process.env.PROT), process.env.HOSTNAME, () =>

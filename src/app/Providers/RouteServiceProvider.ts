@@ -9,14 +9,7 @@ export class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected namespace = 'App.Http.Controllers'
-
-    /**
-     * The path to the "home" route for your application.
-     *
-     * @var string
-     */
-    public HOME = '/home'
+    protected namespace = 'app/Http/Controllers'
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -25,6 +18,8 @@ export class RouteServiceProvider extends ServiceProvider
      */
     public boot()
     {
+        //
+
         super.boot()
     }
 }

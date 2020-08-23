@@ -1,8 +1,4 @@
-const nodePath = require('path')
-
-import * as ExpressRouterImporter from 'express'
-
-import ExpressRouter = ExpressRouterImporter.Router
+import { Router as ExpressRouter } from 'express'
 
 import { RouterControllerType, IRouter } from './IRouter'
 
@@ -14,6 +10,11 @@ export default class Router implements IRouter
      * The route collection instance.
      */
     public static routes: IRoute[] = []
+
+    /**
+     * The route collection instance.
+     */
+    protected baseNamespace = ''
 
     /**
      * The express router.
@@ -32,35 +33,38 @@ export default class Router implements IRouter
     /**
      * All of the short-hand keys for middleware.
      */
-    protected middleware = []
+    protected static middleware = []
 
     /**
      * The priority-sorted list of middleware.
      *
      * Forces the listed middleware to always be in the given order.
      */
-    public middlewarePriority = []
+    public static middlewarePriority = []
 
     /**
      * The routes middlewares for just routing.
      */
-    public middlewareRoutes = {}
+    public static middlewareRoutes = {}
 
     /**
      * Create a new Router instance.
      */
-    constructor()
+    constructor(baseNamespace = 'app/Http/Controllers')
     {
+        // Store base namespace
+        this.baseNamespace = baseNamespace
+
+        // Create instance from express-router and save it locally for set routes
         this.eRouter = ExpressRouter()
-        this.eRouter.get('')
     }
 
     /**
      * Register a short-hand name for a middleware.
      */
-    public aliasMiddleware(name, _class)
+    public static aliasMiddleware(name, _class)
     {
-        this.middlewareRoutes[ name ] = _class
+        Router.middlewareRoutes[ name ] = _class
     }
 
     /**
@@ -96,9 +100,9 @@ export default class Router implements IRouter
                 delimiter: '/',
                 first: false,
                 last: false,
-            }, this.options.namespace, controllerClass)
+            }, this.baseNamespace, this.options.namespace, controllerClass)
 
-            const _controller = require(`../../../app/Http/Controllers/${ _controllerPath }`).default
+            const _controller = require(`../../../${ _controllerPath }`).default
             controller = new _controller()[ controllerMethod ]
         }
         else
@@ -118,7 +122,7 @@ export default class Router implements IRouter
                 first: true,
                 last: false,
             }, '/', this.options.prefix, path),
-            middleware: [ ...this.middlewarePriority, ...this.middleware, ...this.options.middleware ],
+            middleware: [ ...Router.middlewarePriority, ...Router.middleware, ...this.options.middleware ],
             controller,
         })
     }
@@ -234,6 +238,10 @@ export default class Router implements IRouter
 
     public addMiddleware(name: string)
     {
-        this.middleware.push(this.middlewareRoutes[ name ])
+        const _this = global.clone(this)
+
+        _this.options.middleware.push(Router.middlewareRoutes[ name ])
+
+        return _this
     }
 }

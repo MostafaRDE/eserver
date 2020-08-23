@@ -3,11 +3,18 @@ import ServiceProvider from '../../../Support/ServiceProvider'
 export default class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any authentication / authorization services.
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected policies = []
+
+    /**
+     * Register the application's policies.
      *
      * @return void
      */
-    public boot()
+    public registerPolicies()
     {
         //
     }

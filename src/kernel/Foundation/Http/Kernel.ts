@@ -1,3 +1,5 @@
+import Router from '../Routing/Router'
+
 export default class Kernel
 {
     /**
@@ -54,11 +56,11 @@ export default class Kernel
      */
     protected syncMiddlewareToRouter()
     {
-        global.router.middlewarePriority = this.middlewarePriority
+        Router.middlewarePriority = this.middlewarePriority
 
-        this.middleware.forEach(middleware => global.router.middlewarePriority.push(middleware))
+        this.middleware.forEach(middleware => Router.middlewarePriority.push(middleware))
 
-        Object.entries(this.routeMiddleware).forEach(([ key, value ]) => global.router.aliasMiddleware(key, value))
+        Object.entries(this.routeMiddleware).forEach(([ key, value ]) => Router.aliasMiddleware(key, value))
     }
 
     /**
