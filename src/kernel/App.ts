@@ -79,7 +79,7 @@ export default class App
      */
     public listen()
     {
-        this.app.listen(parseInt(process.env.PROT), process.env.HOSTNAME, () =>
+        this.app.listen(parseInt(process.env.PORT), process.env.HOSTNAME, () =>
         {
             console.log(`Server start at port ${ process.env.PROT }`)
         })
