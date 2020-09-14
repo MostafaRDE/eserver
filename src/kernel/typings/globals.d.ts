@@ -7,6 +7,7 @@ declare global
     {
         export interface Global
         {
+            __: (translation: string) => ''
             app: App
             config: Record<string, unknown>
             resolve: (subPath: string) => ''

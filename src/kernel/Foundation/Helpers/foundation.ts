@@ -25,7 +25,7 @@ export function env(name: string, defaultValue?)
         return defaultValue
 }
 
-export function hasOwnProperty(object: Record<string, unknown>, key: string)
+export function hasOwnProperty(object: Record<string, any>, key: string)
 {
     return Object.prototype.hasOwnProperty.call(object, key)
 }
