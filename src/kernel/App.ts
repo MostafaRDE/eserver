@@ -55,10 +55,10 @@ export default class App
     }
 
     /**
-    * Express Middlewares Initializer
-    *
-    * Here initialize routes and add routes in express.
-    */
+     * Express Middlewares Initializer
+     *
+     * Here initialize routes and add routes in express.
+     */
     private initializeExpressMiddlewares()
     {
         this.app.use(compression({ threshold: 0 }))
@@ -81,7 +81,7 @@ export default class App
     {
         this.app.listen(parseInt(process.env.PORT), process.env.HOSTNAME, () =>
         {
-            console.log(`Server start at port ${ process.env.PROT }`)
+            console.log(`Server start at port ${ process.env.PORT }`)
         })
     }
 }
