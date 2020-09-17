@@ -1,4 +1,4 @@
-import ServiceProvider from '../ServiceProvider'
+import ServiceProvider from '../../Foundation/ServiceProvider'
 
 export default class AuthServiceProvider extends ServiceProvider
 {

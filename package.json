@@ -36,6 +36,7 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
+    "eloquent-orm-node": "^0.1.5",
     "express": "^4.17.1",
     "express-useragent": "^1.0.15",
     "helmet": "^4.1.0",

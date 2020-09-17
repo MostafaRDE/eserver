@@ -116,7 +116,7 @@ export default class Router implements IRouter
 
     private static convertMiddlewareForExpress(...middlewares: any[])
     {
-        return middlewares.map(middleware => new middleware().runner)
+        return middlewares.map(middleware => new middleware().runner())
     }
 
     private addRoute({ method, path, controller }: IRoute)
@@ -211,7 +211,7 @@ export default class Router implements IRouter
      * Options
      */
 
-    public namespace(namespace: string)
+    public namespace(namespace: string): Router
     {
         const _this = global.clone(this)
 
@@ -224,7 +224,7 @@ export default class Router implements IRouter
         return _this
     }
 
-    public prefix(path: string)
+    public prefix(path: string): Router
     {
         const _this = global.clone(this)
 
@@ -242,7 +242,7 @@ export default class Router implements IRouter
         callback(global.clone(this))
     }
 
-    public addMiddleware(name: string)
+    public addMiddleware(name: string): Router
     {
         const _this = global.clone(this)
 

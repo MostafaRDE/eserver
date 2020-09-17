@@ -112,6 +112,9 @@ module.exports = {
          * Framework Service Providers...
          */
 
+        require('../kernel/Support/Database/DatabaseServiceProvider').DatabaseServiceProvider,
+        require('../kernel/Support/Translation/TranslationServiceProvider').TranslationServiceProvider,
+
         /*
         * Package Service Providers...
         */
