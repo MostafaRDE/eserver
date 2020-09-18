@@ -11,6 +11,19 @@ import '../kernel/Initializer'
 
 /*
 |--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| The next, we will do is create a new EServer application instance
+| which serves all program at on the your custom port.
+|
+*/
+
+import App from '../kernel/App'
+global.app = new App()
+
+/*
+|--------------------------------------------------------------------------
 | Service Providers
 |--------------------------------------------------------------------------
 |

@@ -3,7 +3,7 @@
 | Root Directory Resolver
 |--------------------------------------------------------------------------
 |
-| After, we create root directory resolver in global variable.
+| At the start, we create root directory resolver in global variable.
 |
 */
 
@@ -12,23 +12,10 @@ global.resolve = subPath => path.resolve(__dirname, subPath)
 
 /*
 |--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new EServer application instance
-| which serves all program at on the your custom port.
-|
-*/
-
-import App from './src/kernel/App'
-global.app = new App()
-
-/*
-|--------------------------------------------------------------------------
 | Bootstrapping and config application
 |--------------------------------------------------------------------------
 |
-| The second thing we will config application for run and use it.
+| The first thing we will config application for run and use it.
 |
 */
 

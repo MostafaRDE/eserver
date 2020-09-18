@@ -71,7 +71,7 @@ export default class App
         this.app.use(bodyParser.urlencoded({ extended: false }))
         this.app.use(cookieParser())
         this.app.use(userAgent.express())
-        this.app.use(cors())
+        this.app.use(cors(global.config.cors))
     }
 
     /**
