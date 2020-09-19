@@ -9,13 +9,13 @@
 |
 */
 
-import * as express from 'express'
-import * as compression from 'compression'
-import * as helmet from 'helmet'
-import * as bodyParser from 'body-parser'
-import * as cookieParser from 'cookie-parser'
-import * as userAgent from 'express-useragent'
-import * as cors from 'cors'
+import express from 'express'
+import compression from 'compression'
+import helmet from 'helmet'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import userAgent from 'express-useragent'
+import cors from 'cors'
 
 import HttpKernel from '../app/Http/Kernel'
 import ServiceProvider from './Foundation/ServiceProvider'
