@@ -29,6 +29,7 @@
     },
     "homepage": "https://gitlab.com/mostafarde/karzar-server-v2#README",
     "dependencies": {
+        "@rosokht/fullclone": "^0.9.2",
         "@types/node": "^14.0.27",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.5",

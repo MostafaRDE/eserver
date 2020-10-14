@@ -1,9 +1,9 @@
 import { Router as ExpressRouter } from 'express'
+const { clone } = require('@rosokht/fullclone')
 
 import { RouterControllerType, IRouter } from './IRouter'
 
 import IRoute from './IRoute'
-import Middleware from "../Middleware";
 
 export default class Router implements IRouter
 {
@@ -213,7 +213,7 @@ export default class Router implements IRouter
 
     public namespace(namespace: string): Router
     {
-        const _this = global.clone(this)
+        const _this = clone(this)
 
         _this.options.namespace = global.stringJoin({
             delimiter: '/',
@@ -226,7 +226,7 @@ export default class Router implements IRouter
 
     public prefix(path: string): Router
     {
-        const _this = global.clone(this)
+        const _this = clone(this)
 
         _this.options.prefix = global.stringJoin({
             delimiter: '/',
@@ -239,12 +239,12 @@ export default class Router implements IRouter
 
     public group(callback: (router: Router) => void)
     {
-        callback(global.clone(this))
+        callback(clone(this))
     }
 
     public addMiddleware(name: string): Router
     {
-        const _this = global.clone(this)
+        const _this = clone(this, 2)
 
         _this.options.middleware.push(Router.middlewareRoutes[ name ])
 
