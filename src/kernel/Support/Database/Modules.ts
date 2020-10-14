@@ -1,8 +1,8 @@
-import 'eloquent-orm-node/lib'
-import Model, { instanceCreator } from 'eloquent-orm-node/lib/eloquent/Model'
-import enumDrivers from 'eloquent-orm-node/lib/modules/enums/Drivers'
-import enumModelTypes from 'eloquent-orm-node/lib/modules/enums/ModelTypes'
-import enumQueryTypes from 'eloquent-orm-node/lib/modules/enums/QueryTypes'
+import 'eloquent-orm-node/dist/lib'
+import Model, { instanceCreator } from 'eloquent-orm-node/dist/lib/eloquent/Model'
+import enumDrivers from 'eloquent-orm-node/dist/lib/modules/enums/Drivers'
+import enumModelTypes from 'eloquent-orm-node/dist/lib/modules/enums/ModelTypes'
+import enumQueryTypes from 'eloquent-orm-node/dist/lib/modules/enums/QueryTypes'
 
 global.Model = Model
 global.DBInstanceCreator = instanceCreator

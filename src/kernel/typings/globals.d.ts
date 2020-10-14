@@ -1,6 +1,6 @@
 import Router from '../Foundation/Http/Routing/Router'
 import App from '../App'
-import { instanceCreator } from 'eloquent-orm-node/lib/eloquent/Model'
+import { instanceCreator } from 'eloquent-orm-node/dist/lib/eloquent/Model'
 
 declare global
 {
@@ -9,16 +9,16 @@ declare global
         export interface Global
         {
             // App
-            
+
             __: (translation: string) => ''
             app: App
             config: Record<string, unknown>
             resolve: (subPath: string) => ''
             router: Router
-            
-            
+
+
             // Database
-            
+
             // @ts-ignore
             DB: DB.prototype
             // @ts-ignore
@@ -29,7 +29,7 @@ declare global
 
 
             // Translation
-            
+
             t: (text: string) => string | Record<string, unknown>
         }
     }

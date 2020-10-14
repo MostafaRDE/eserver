@@ -1,5 +1,5 @@
 import ServiceProvider from '../../Foundation/ServiceProvider'
-import DB from 'eloquent-orm-node/lib/db/DB'
+import DB from 'eloquent-orm-node/dist/lib/db/DB'
 
 export class DatabaseServiceProvider extends ServiceProvider
 {
