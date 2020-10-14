@@ -9,6 +9,6 @@
         "./src",
         "./server.ts"
     ],
-    "exec": "npm start",
+    "exec": "tsc && cross-env NODE_ENV=development node dist/server.js",
     "ext": "ts"
 }
