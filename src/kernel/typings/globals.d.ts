@@ -12,7 +12,7 @@ declare global
 
             __: (translation: string) => ''
             app: App
-            config: Record<string, unknown>
+            config: Record<string, any>
             resolve: (subPath: string) => ''
             router: Router
 

@@ -16,6 +16,8 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import userAgent from 'express-useragent'
 import cors from 'cors'
+import formData from 'express-form-data'
+import os from 'os'
 
 import HttpKernel from '../app/Http/Kernel'
 import ServiceProvider from './Foundation/ServiceProvider'
@@ -72,6 +74,26 @@ export default class App
         this.app.use(cookieParser())
         this.app.use(userAgent.express())
         this.app.use(cors(global.config.cors))
+
+
+        /**
+         * Options are the same as multiparty takes.
+         * But there is a new option "autoClean" to clean all files in "uploadDir" folder after the response.
+         * By default, it is "false".
+         */
+        const options = {
+            uploadDir: os.tmpdir(),
+            autoClean: true,
+        }
+
+        // parse data with connect-multiparty.
+        this.app.use(formData.parse(options))
+        // delete from the request all empty files (size == 0)
+        this.app.use(formData.format())
+        // change the file objects to fs.ReadStream
+        this.app.use(formData.stream())
+        // union the body and the files
+        this.app.use(formData.union())
     }
 
     /**
@@ -81,7 +103,7 @@ export default class App
     {
         this.app.listen(parseInt(process.env.PORT), () =>
         {
-            console.log(`Server start at port ${ process.env.PORT }`)
+            console.log(`Server start at: http://localhost:${ process.env.PORT }`)
         })
     }
 }
