@@ -1,4 +1,4 @@
-import ServiceProvider from '../../Foundation/ServiceProvider'
+import ServiceProvider from '../../illuminate/ServiceProvider/ServiceProvider'
 
 export class TranslationServiceProvider extends ServiceProvider
 {

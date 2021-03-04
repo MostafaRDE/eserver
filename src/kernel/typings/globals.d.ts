@@ -1,6 +1,6 @@
-import Router from '../Foundation/Http/Routing/Router'
+import Router from '../illuminate/Http/Routing/Router'
 import App from '../App'
-import { instanceCreator } from 'eloquent-orm-node/dist/lib/eloquent/Model'
+import NotificationManager from './../Support/Notification/core/Notification'
 
 declare global
 {
@@ -8,7 +8,7 @@ declare global
     {
         export interface Global
         {
-            // App
+            // <editor-fold desc="App">
 
             __: (translation: string) => ''
             app: App
@@ -16,21 +16,27 @@ declare global
             resolve: (subPath: string) => ''
             router: Router
 
+            // <editor-fold>
 
-            // Database
+
+            // <editor-fold desc="Database">
 
             // @ts-ignore
             DB: DB.prototype
             // @ts-ignore
             Model: Model.prototype
             // @ts-ignore
-            DBInstanceCreator: instanceCreator.prototype
+            DBInstanceCreator: DBInstanceCreator.prototype
             DBEnums: { enumDrivers, enumModelTypes, enumQueryTypes }
 
+            // </editor-fold>
 
-            // Translation
+
+            // <editor-fold desc="Translation">
 
             t: (text: string) => string | Record<string, unknown>
+
+            // </editor-fold>
         }
     }
 }
