@@ -1,0 +1,18 @@
+import Migration from '../../kernel/CLI/Migration/Migration'
+import Schema from '../../kernel/CLI/Schema/Schema'
+
+module.exports = class {{ class_name }} extends Migration
+{
+    up()
+    {
+        Schema.table('{{ table_name }}', (table) =>
+        {
+
+        })
+    }
+
+    down()
+    {
+
+    }
+}
