@@ -1,5 +1,5 @@
 import Blueprint from './Blueprint'
-
+import QueryExecutor from './QueryExecutor'
 
 interface BlueprintFunctionImporter
 {
@@ -14,7 +14,7 @@ export default class Schema
 
         blueprint(_blueprint)
 
-        _blueprint.create()
+        QueryExecutor.create(_blueprint)
             .then(result =>
             {
                 //
@@ -31,7 +31,7 @@ export default class Schema
 
         blueprint(_blueprint)
 
-        _blueprint.table()
+        QueryExecutor.table(_blueprint)
             .then(result =>
             {
                 //
@@ -46,7 +46,7 @@ export default class Schema
     {
         const _blueprint = new Blueprint()
 
-        _blueprint.drop()
+        QueryExecutor.drop(_blueprint)
             .then(result =>
             {
                 //

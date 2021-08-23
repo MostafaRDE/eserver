@@ -44,37 +44,4 @@ export default class Blueprint implements IColumnTypes
 
     // </editor-fold>
 
-    // ------------------------------------------------------------------------
-
-    // <editor-fold desc="Query executors">
-
-    create(): Promise<any>
-    {
-        return new Promise((resolve, reject) =>
-        {
-            resolve(true)
-            reject(false)
-        })
-    }
-
-    table(): Promise<any>
-    {
-        return new Promise((resolve, reject) =>
-        {
-            resolve(true)
-            reject(false)
-        })
-    }
-
-    drop(): Promise<any>
-    {
-        return new Promise((resolve, reject) =>
-        {
-            resolve(true)
-            reject(false)
-        })
-    }
-
-    // </editor-fold>
-
 }
