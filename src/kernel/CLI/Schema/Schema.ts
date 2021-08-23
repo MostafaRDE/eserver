@@ -12,6 +12,8 @@ export default class Schema
     {
         const _blueprint = new Blueprint()
 
+        _blueprint.table = table
+
         blueprint(_blueprint)
 
         QueryExecutor.create(_blueprint)
@@ -29,6 +31,8 @@ export default class Schema
     {
         const _blueprint = new Blueprint()
 
+        _blueprint.table = table
+
         blueprint(_blueprint)
 
         QueryExecutor.table(_blueprint)
@@ -45,6 +49,8 @@ export default class Schema
     static drop(table: string)
     {
         const _blueprint = new Blueprint()
+
+        _blueprint.table = table
 
         QueryExecutor.drop(_blueprint)
             .then(result =>

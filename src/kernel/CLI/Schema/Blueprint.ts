@@ -14,6 +14,7 @@ interface IIndex
 
 export default class Blueprint implements IColumnTypes
 {
+    table: string
     columns: Array<ColumnEditor> = []
     primaryKey: IIndex
     indexes: Array<IIndex> = []
