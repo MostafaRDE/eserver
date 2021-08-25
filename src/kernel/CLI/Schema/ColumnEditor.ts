@@ -4,18 +4,20 @@ interface IOptions {
     name: string,
     type: string,
     default?: any,
-    description?: string,
     autoIncrement?: boolean,
+    nullable?: boolean,
+    description?: string,
 }
 
 interface IColumn
 {
-    default(value: any): this
-    primaryKey(name?: string): this
-    index(name?: string): this
-    unique(name?: string): this
     autoIncrement(name?: string): this
+    default(value: any): this
     description(text: string): this
+    index(name?: string): this
+    nullable(name?: string): this
+    primaryKey(name?: string): this
+    unique(name?: string): this
 }
 
 export default class ColumnEditor implements IColumn
@@ -27,6 +29,7 @@ export default class ColumnEditor implements IColumn
         type: '',
         default: undefined,
         autoIncrement: false,
+        nullable: false,
         description: '',
     }
 
@@ -54,15 +57,6 @@ export default class ColumnEditor implements IColumn
         return this
     }
 
-    primaryKey(name?: string): this
-    {
-        if (!name) name = `${ this.options.name }_primary_key`
-
-        this.blueprint.primaryKey = { name, columns: [ this.options.name ] }
-
-        return this
-    }
-
     index(name?: string): this
     {
         if (!name) name = `${ this.options.name }_index`
@@ -71,6 +65,22 @@ export default class ColumnEditor implements IColumn
             name,
             columns: [ this.options.name ],
         })
+
+        return this
+    }
+
+    nullable(name?: string): this
+    {
+        this.options.nullable = true
+
+        return this
+    }
+
+    primaryKey(name?: string): this
+    {
+        if (!name) name = `${ this.options.name }_primary_key`
+
+        this.blueprint.primaryKey = { name, columns: [ this.options.name ] }
 
         return this
     }
