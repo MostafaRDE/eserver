@@ -3,16 +3,19 @@ import Schema from '../../kernel/CLI/Schema/Schema'
 
 module.exports = class CreateUsersTable extends Migration
 {
-    up()
+    async up()
     {
-        Schema.create('users', (table) =>
+        await Schema.create('users', (table) =>
         {
             table.bigIncrements()
+            table.string(name)
+            table.string('email', 256)
+            table.timestamps(true)
         })
     }
 
-    down()
+    async down()
     {
-        Schema.drop('users')
+        await Schema.drop('users')
     }
 }
