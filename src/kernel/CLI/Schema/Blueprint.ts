@@ -54,21 +54,25 @@ class ForeignKeyFactory
     references(columnName: string)
     {
         this.foreignKey.references = columnName
+        return this
     }
 
     on(tableName: string)
     {
         this.foreignKey.on = tableName
+        return this
     }
 
     onUpdate(type: string)
     {
         this.foreignKey.onUpdate = type
+        return this
     }
 
     onDelete(type: string)
     {
         this.foreignKey.onDelete = type
+        return this
     }
 }
 
