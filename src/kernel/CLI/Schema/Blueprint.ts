@@ -3,7 +3,28 @@ import ColumnEditor from './ColumnEditor'
 
 interface IColumnTypes
 {
-    bigIncrements()
+    bigIncrements(name?: string): ColumnEditor
+    bigInteger(name?: string, unsigned?: boolean): ColumnEditor
+    boolean(name?: string): ColumnEditor
+    increments(name?: string): ColumnEditor
+    integer(name?: string, unsigned?: boolean): ColumnEditor
+    json(name?: string): ColumnEditor
+    jsonb(name?: string): ColumnEditor
+    softDeletes(withTimeZone?: boolean)
+    string(name: string, length?: number): ColumnEditor
+    text(name: string): ColumnEditor
+    timestamp(name: string, withTimeZone?: boolean): ColumnEditor
+    timestamps(withTimeZone?: boolean)
+    timestampstz()
+    timestamptz(name: string): ColumnEditor
+    unsignedBigInteger(name?: string): ColumnEditor
+    unsignedInteger(name?: string): ColumnEditor
+
+}
+
+interface IActions
+{
+    foreign(columnName: string): ForeignKeyFactory
 }
 
 interface IIndex
@@ -12,13 +33,53 @@ interface IIndex
     columns: Array<string>,
 }
 
-export default class Blueprint implements IColumnTypes
+interface IForeignKey
+{
+    name: string,
+    references?: string,
+    on?: string,
+    onUpdate?: string,
+    onDelete?: string,
+}
+
+class ForeignKeyFactory
+{
+    foreignKey: IForeignKey
+
+    constructor(foreignKey: IForeignKey)
+    {
+        this.foreignKey = foreignKey
+    }
+
+    references(columnName: string)
+    {
+        this.foreignKey.references = columnName
+    }
+
+    on(tableName: string)
+    {
+        this.foreignKey.on = tableName
+    }
+
+    onUpdate(type: string)
+    {
+        this.foreignKey.onUpdate = type
+    }
+
+    onDelete(type: string)
+    {
+        this.foreignKey.onDelete = type
+    }
+}
+
+export default class Blueprint implements IColumnTypes, IActions
 {
     table: string
     columns: Array<ColumnEditor> = []
     primaryKey: IIndex
     indexes: Array<IIndex> = []
     uniques: Array<IIndex> = []
+    foreignKeys: Array<IForeignKey> = []
 
     // ------------------------------------------------------------------------
 
@@ -31,6 +92,8 @@ export default class Blueprint implements IColumnTypes
         const column = new ColumnEditor(this, {
             name: name || 'id',
             type: types.bigIncrements(),
+            nullable: false,
+            unsigned: true,
         }).primaryKey().autoIncrement()
 
         this.columns.push(column)
@@ -38,13 +101,14 @@ export default class Blueprint implements IColumnTypes
         return column
     }
 
-    bigInteger(name?: string): ColumnEditor
+    bigInteger(name?: string, unsigned?: boolean): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
         const column = new ColumnEditor(this, {
             name,
             type: types.bigInteger(),
+            unsigned: unsigned ? unsigned : false,
         })
 
         this.columns.push(column)
@@ -73,6 +137,8 @@ export default class Blueprint implements IColumnTypes
         const column = new ColumnEditor(this, {
             name: name || 'id',
             type: types.increments(),
+            nullable: false,
+            unsigned: true,
         }).primaryKey().autoIncrement()
 
         this.columns.push(column)
@@ -80,13 +146,14 @@ export default class Blueprint implements IColumnTypes
         return column
     }
 
-    integer(name?: string): ColumnEditor
+    integer(name?: string, unsigned?: boolean): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
         const column = new ColumnEditor(this, {
             name,
             type: types.integer(),
+            unsigned: unsigned ? unsigned : false,
         })
 
         this.columns.push(column)
@@ -203,11 +270,36 @@ export default class Blueprint implements IColumnTypes
         return this.timestamp(name, true)
     }
 
+    unsignedBigInteger(name?: string): ColumnEditor
+    {
+        return this.bigInteger(name, true)
+    }
+
+    unsignedInteger(name?: string): ColumnEditor
+    {
+        return this.integer(name, true)
+    }
+
     // </editor-fold>
 
     // ------------------------------------------------------------------------
 
     // <editor-fold desc="Actions">
+
+    foreign(columnName: string): ForeignKeyFactory
+    {
+        this.foreignKeys.push({ name: columnName })
+
+        const foreignKeyIndex = this.foreignKeys.findIndex(item => item.name === columnName)
+
+        return new ForeignKeyFactory(this.foreignKeys[ foreignKeyIndex ])
+    }
+
+    // </editor-fold>
+
+    // ------------------------------------------------------------------------
+
+    // <editor-fold desc="Helpers">
 
     removeColumnFromListIfExists(name?: string)
     {

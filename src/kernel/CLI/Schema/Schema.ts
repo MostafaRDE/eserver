@@ -8,7 +8,7 @@ interface BlueprintFunctionImporter
 
 export default class Schema
 {
-    static create(table: string, blueprint: BlueprintFunctionImporter)
+    static async create(table: string, blueprint: BlueprintFunctionImporter)
     {
         const _blueprint = new Blueprint()
 
@@ -16,15 +16,12 @@ export default class Schema
 
         blueprint(_blueprint)
 
-        QueryExecutor.create(_blueprint)
-            .then(result =>
-            {
-                //
-            })
-            .catch(error =>
-            {
-                throw error
-            })
+        try
+        {
+            await QueryExecutor.create(_blueprint)
+        }
+        catch (e)
+        {}
     }
 
     static table(table: string, blueprint: BlueprintFunctionImporter)

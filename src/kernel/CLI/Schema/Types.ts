@@ -9,7 +9,7 @@ export default {
         switch (Drivers[ connectionString.driver ])
         {
             case Drivers.postgres:
-                return 'BIGINT'
+                return 'BIGSERIAL'
         }
     },
 
@@ -36,7 +36,7 @@ export default {
         switch (Drivers[ connectionString.driver ])
         {
             case Drivers.postgres:
-                return 'INT'
+                return 'SERIAL'
         }
     },
 

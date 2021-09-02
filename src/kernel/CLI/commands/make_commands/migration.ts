@@ -2,6 +2,7 @@ import * as fs from 'fs'
 const path = require('path')
 const handlebars = require('handlebars')
 import { pascalCase } from 'change-case'
+import chalk from 'chalk'
 
 exports.command = 'migration <name> [table]'
 exports.demandOption = [ 'table' ]
@@ -41,6 +42,8 @@ exports.handler = (argv) =>
     {
         if (err) throw err
 
-        console.log('Migration is created successfully.')
+        const ctx = new chalk.Instance({ level: 3 })
+
+        console.log(ctx`{bgGreenBright.whiteBright Migration is created successfully.}`)
     })
 }

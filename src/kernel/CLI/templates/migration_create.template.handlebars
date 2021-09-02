@@ -3,16 +3,16 @@ import Schema from '../../kernel/CLI/Schema/Schema'
 
 module.exports = class {{ class_name }} extends Migration
 {
-    up()
+    async up()
     {
-        Schema.create('{{ table_name }}', (table) =>
+        await Schema.create('{{ table_name }}', (table) =>
         {
             //
         })
     }
 
-    down()
+    async down()
     {
-        Schema.drop('{{ table_name }}')
+        await Schema.drop('{{ table_name }}')
     }
 }

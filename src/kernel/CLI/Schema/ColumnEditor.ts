@@ -6,6 +6,8 @@ interface IOptions {
     default?: any,
     autoIncrement?: boolean,
     nullable?: boolean,
+    unsigned?: boolean,
+    raw?: string,
     description?: string,
 }
 
@@ -15,9 +17,12 @@ interface IColumn
     default(value: any): this
     description(text: string): this
     index(name?: string): this
-    nullable(name?: string): this
+    notNull(): this
+    nullable(): this
     primaryKey(name?: string): this
+    raw(raw?: string): this
     unique(name?: string): this
+    unsigned(): this
 }
 
 export default class ColumnEditor implements IColumn
@@ -29,7 +34,8 @@ export default class ColumnEditor implements IColumn
         type: '',
         default: undefined,
         autoIncrement: false,
-        nullable: false,
+        nullable: true,
+        unsigned: false,
         description: '',
     }
 
@@ -59,7 +65,7 @@ export default class ColumnEditor implements IColumn
 
     index(name?: string): this
     {
-        if (!name) name = `${ this.options.name }_index`
+        if (!name) name = `${ this.blueprint.table }_${ this.options.name }_index`
 
         this.blueprint.indexes.push({
             name,
@@ -69,7 +75,14 @@ export default class ColumnEditor implements IColumn
         return this
     }
 
-    nullable(name?: string): this
+    notNull(): this
+    {
+        this.options.nullable = false
+
+        return this
+    }
+
+    nullable(): this
     {
         this.options.nullable = true
 
@@ -78,21 +91,35 @@ export default class ColumnEditor implements IColumn
 
     primaryKey(name?: string): this
     {
-        if (!name) name = `${ this.options.name }_primary_key`
+        if (!name) name = `${ this.blueprint.table }_${ this.options.name }_pk`
 
         this.blueprint.primaryKey = { name, columns: [ this.options.name ] }
 
         return this
     }
 
+    raw(raw?: string): this
+    {
+        this.options.raw = raw
+
+        return this
+    }
+
     unique(name?: string): this
     {
-        if (!name) name = `${ this.options.name }_unique`
+        if (!name) name = `${ this.blueprint.table }_${ this.options.name }_uindex`
 
         this.blueprint.uniques.push({
             name,
             columns: [ this.options.name ],
         })
+
+        return this
+    }
+
+    unsigned(): this
+    {
+        this.options.unsigned = true
 
         return this
     }
