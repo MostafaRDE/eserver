@@ -15,7 +15,7 @@ interface IColumnTypes
     jsonb(name: string): ColumnEditor
     numeric(name: string): ColumnEditor
     real(name: string): ColumnEditor
-    smallInteger(name: string)
+    smallInteger(name: string, unsigned?: boolean)
     softDeletes(withTimeZone?: boolean)
     string(name: string, length?: number): ColumnEditor
     text(name: string): ColumnEditor
@@ -26,6 +26,7 @@ interface IColumnTypes
     timestamptz(name: string): ColumnEditor
     unsignedBigInteger(name?: string): ColumnEditor
     unsignedInteger(name?: string): ColumnEditor
+    unsignedSmallInteger(name?: string): ColumnEditor
 
 }
 
@@ -388,6 +389,11 @@ export default class Blueprint implements IColumnTypes, IActions
     unsignedInteger(name?: string): ColumnEditor
     {
         return this.integer(name, true)
+    }
+
+    unsignedSmallInteger(name?: string): ColumnEditor
+    {
+        return this.smallInteger(name, true)
     }
 
     // </editor-fold>

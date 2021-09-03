@@ -112,7 +112,7 @@ export default {
         }
     },
 
-    smallInteger(length?: number): string
+    smallInteger(): string
     {
         switch (Drivers[ connectionString.driver ])
         {
