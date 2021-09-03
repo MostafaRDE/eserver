@@ -4,13 +4,18 @@ import ColumnEditor from './ColumnEditor'
 interface IColumnTypes
 {
     bigIncrements(name?: string): ColumnEditor
-    bigInteger(name?: string, unsigned?: boolean): ColumnEditor
-    boolean(name?: string): ColumnEditor
-    date(name?: string): ColumnEditor
+    bigInteger(name: string, unsigned?: boolean): ColumnEditor
+    boolean(name: string): ColumnEditor
+    date(name: string): ColumnEditor
+    decimal(name: string): ColumnEditor
+    double(name: string): ColumnEditor
     increments(name?: string): ColumnEditor
-    integer(name?: string, unsigned?: boolean): ColumnEditor
-    json(name?: string): ColumnEditor
-    jsonb(name?: string): ColumnEditor
+    integer(name: string, unsigned?: boolean): ColumnEditor
+    json(name: string): ColumnEditor
+    jsonb(name: string): ColumnEditor
+    numeric(name: string): ColumnEditor
+    real(name: string): ColumnEditor
+    smallInteger(name: string)
     softDeletes(withTimeZone?: boolean)
     string(name: string, length?: number): ColumnEditor
     text(name: string): ColumnEditor
@@ -107,7 +112,7 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    bigInteger(name?: string, unsigned?: boolean): ColumnEditor
+    bigInteger(name: string, unsigned?: boolean): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
@@ -122,7 +127,7 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    boolean(name?: string): ColumnEditor
+    boolean(name: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
@@ -136,13 +141,41 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    date(name?: string): ColumnEditor
+    date(name: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
         const column = new ColumnEditor(this, {
             name,
             type: types.date(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    decimal(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.decimal(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    double(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.double(),
         })
 
         this.columns.push(column)
@@ -166,7 +199,7 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    integer(name?: string, unsigned?: boolean): ColumnEditor
+    integer(name: string, unsigned?: boolean): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
@@ -181,7 +214,7 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    json(name?: string): ColumnEditor
+    json(name: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
@@ -195,13 +228,56 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
-    jsonb(name?: string): ColumnEditor
+    jsonb(name: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
 
         const column = new ColumnEditor(this, {
             name,
             type: types.jsonb(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    numeric(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.numeric(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    real(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.real(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    smallInteger(name: string, unsigned?: boolean): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.smallInteger(),
+            unsigned: unsigned ? unsigned : false,
         })
 
         this.columns.push(column)

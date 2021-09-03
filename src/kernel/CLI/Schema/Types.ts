@@ -40,6 +40,24 @@ export default {
         }
     },
 
+    decimal(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'DECIMAL'
+        }
+    },
+
+    double(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'DOUBLE'
+        }
+    },
+
     increments(): string
     {
         switch (Drivers[ connectionString.driver ])
@@ -73,6 +91,33 @@ export default {
         {
             case Drivers.postgres:
                 return 'JSONB'
+        }
+    },
+
+    numeric(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'NUMERIC'
+        }
+    },
+
+    real(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'REAL'
+        }
+    },
+
+    smallInteger(length?: number): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'SMALLINT'
         }
     },
 
