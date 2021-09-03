@@ -6,6 +6,7 @@ interface IColumnTypes
     bigIncrements(name?: string): ColumnEditor
     bigInteger(name?: string, unsigned?: boolean): ColumnEditor
     boolean(name?: string): ColumnEditor
+    date(name?: string): ColumnEditor
     increments(name?: string): ColumnEditor
     integer(name?: string, unsigned?: boolean): ColumnEditor
     json(name?: string): ColumnEditor
@@ -13,6 +14,7 @@ interface IColumnTypes
     softDeletes(withTimeZone?: boolean)
     string(name: string, length?: number): ColumnEditor
     text(name: string): ColumnEditor
+    time(name: string): ColumnEditor
     timestamp(name: string, withTimeZone?: boolean): ColumnEditor
     timestamps(withTimeZone?: boolean)
     timestampstz()
@@ -134,6 +136,20 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
+    date(name?: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.date(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
     increments(name?: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name || 'id')
@@ -226,6 +242,20 @@ export default class Blueprint implements IColumnTypes, IActions
         const column = new ColumnEditor(this, {
             name,
             type: types.text(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    time(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.time(),
         })
 
         this.columns.push(column)

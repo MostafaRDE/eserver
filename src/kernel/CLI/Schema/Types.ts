@@ -31,6 +31,15 @@ export default {
         }
     },
 
+    date(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'DATE'
+        }
+    },
+
     increments(): string
     {
         switch (Drivers[ connectionString.driver ])
@@ -82,6 +91,15 @@ export default {
         {
             case Drivers.postgres:
                 return 'TEXT'
+        }
+    },
+
+    time(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'TIME'
         }
     },
 
