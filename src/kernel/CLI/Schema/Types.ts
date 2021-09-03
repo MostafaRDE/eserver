@@ -76,6 +76,15 @@ export default {
         }
     },
 
+    ip(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'INET'
+        }
+    },
+
     json(): string
     {
         switch (Drivers[ connectionString.driver ])
@@ -109,6 +118,15 @@ export default {
         {
             case Drivers.postgres:
                 return 'REAL'
+        }
+    },
+
+    smallIncrements(): string
+    {
+        switch (Drivers[ connectionString.driver ])
+        {
+            case Drivers.postgres:
+                return 'SMALLSERIAL'
         }
     },
 

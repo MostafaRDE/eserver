@@ -11,10 +11,12 @@ interface IColumnTypes
     double(name: string): ColumnEditor
     increments(name?: string): ColumnEditor
     integer(name: string, unsigned?: boolean): ColumnEditor
+    ip(name: string): ColumnEditor
     json(name: string): ColumnEditor
     jsonb(name: string): ColumnEditor
     numeric(name: string): ColumnEditor
     real(name: string): ColumnEditor
+    smallIncrements(name?: string): ColumnEditor
     smallInteger(name: string, unsigned?: boolean)
     softDeletes(withTimeZone?: boolean)
     string(name: string, length?: number): ColumnEditor
@@ -215,6 +217,20 @@ export default class Blueprint implements IColumnTypes, IActions
         return column
     }
 
+    ip(name: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name)
+
+        const column = new ColumnEditor(this, {
+            name,
+            type: types.ip(),
+        })
+
+        this.columns.push(column)
+
+        return column
+    }
+
     json(name: string): ColumnEditor
     {
         this.removeColumnFromListIfExists(name)
@@ -265,6 +281,22 @@ export default class Blueprint implements IColumnTypes, IActions
             name,
             type: types.real(),
         })
+
+        this.columns.push(column)
+
+        return column
+    }
+
+    smallIncrements(name?: string): ColumnEditor
+    {
+        this.removeColumnFromListIfExists(name || 'id')
+
+        const column = new ColumnEditor(this, {
+            name: name || 'id',
+            type: types.smallIncrements(),
+            nullable: false,
+            unsigned: true,
+        }).primaryKey().autoIncrement()
 
         this.columns.push(column)
 
