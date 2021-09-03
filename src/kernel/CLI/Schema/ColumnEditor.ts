@@ -36,7 +36,7 @@ export default class ColumnEditor implements IColumn
         autoIncrement: false,
         nullable: true,
         unsigned: false,
-        description: '',
+        description: undefined,
     }
 
     constructor(blueprint: Blueprint, options: IOptions)

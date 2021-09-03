@@ -1,6 +1,6 @@
 {
     "name": "eserver",
-    "version": "0.9.3",
+    "version": "0.9.4",
     "description": "Backend EServer server",
     "private": true,
     "main": "dist/server.js",

@@ -2,7 +2,8 @@ import Blueprint from '../Blueprint'
 
 export function create (blueprint: Blueprint)
 {
-    let columns = '', indexes = '', uniqueIndexes = '', primaryKey = ''
+    let columns = '', columnsDescriptions = '', indexes = '', uniqueIndexes = '', primaryKey = ''
+    const columnsDescriptionsCached: Array<{ name: string, text: string }> = []
 
     /**
      * Create columns query generator
@@ -33,7 +34,29 @@ export function create (blueprint: Blueprint)
 
         if (item.options.raw) columns += ` ${ item.options.default }`
 
+        if (item.options.description) columnsDescriptionsCached.push({ name: item.options.name, text: item.options.description })
+
         if (index + 1 < blueprint.columns.length) columns += ', '
+    })
+
+    /**
+     * Create columns-descriptions query generator
+     */
+    columnsDescriptionsCached.forEach(item => columnsDescriptions += ` COMMENT ON COLUMN ${ blueprint.table }.${ item.name } IS ${ item.text };`)
+
+    /**
+     * Create indexes query generator
+     */
+    blueprint.indexes.forEach(item =>
+    {
+        const columnNames = item.columns.map((columnName, index) =>
+        {
+            let name = columnName
+            if (index + 1 < item.columns.length) name += ', '
+            return name
+        })
+
+        indexes += ` CREATE INDEX ${ item.name } ON ${ blueprint.table } (${ columnNames });`
     })
 
     /**
@@ -82,7 +105,7 @@ export function create (blueprint: Blueprint)
     /**
      * Return final query and mixing other queries
      */
-    return `CREATE TABLE IF NOT EXISTS ${ blueprint.table } (${ columns }); ${ indexes }${ uniqueIndexes }${ primaryKey }`
+    return `CREATE TABLE IF NOT EXISTS ${ blueprint.table } (${ columns }); ${ columnsDescriptions }${ indexes }${ uniqueIndexes }${ primaryKey }`
 }
 
 export function existsTable(tableName: string, schema?: string)
